@@ -6,7 +6,9 @@
     'website': 'www.richylife.ae',
     'category': 'travel',
     'summary': 'order management for travel packages and services',
-    'description': 'order management for travel packages and services',
+        'description': """
+The Order Management System is a comprehensive software solution designed to streamline and automate the process of managing orders for your business. With its intuitive interface and powerful features, the system empowers your team to efficiently handle all aspects of the order lifecycle, from creation to fulfillment.
+    """,
     'depends':[],
     'data':[],
     'installable': True,
