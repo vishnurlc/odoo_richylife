@@ -1,0 +1,16 @@
+<odoo>
+    <data>
+        <record model="ir.ui.view" id="view_strapi_order_form">
+            <field name="name">Strapi Order Form</field>
+            <field name="model">strapi.order</field>
+            <field name="arch" type="xml">
+                <form string="Strapi Order">
+                    <group>
+                        <field name="user_id"/>
+                        <field name="order_details"/>
+                    </group>
+                </form>
+            </field>
+        </record>
+    </data>
+</odoo>

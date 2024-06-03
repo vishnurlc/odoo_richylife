@@ -1,63 +1,123 @@
 <odoo>
   <data>
-    <!-- explicit list view definition -->
-
-
-    <record model="ir.ui.view" id="order_crm.list">
-      <field name="name">order_crm list</field>
-      <field name="model">order_crm.order_crm</field>
+    <!-- Strapi User Form View -->
+    <record model="ir.ui.view" id="view_strapi_user_form">
+      <field name="name">strapi.user.form</field>
+      <field name="model">strapi.user</field>
       <field name="arch" type="xml">
-        <tree>
-          <field name="order_id"/>
+        <form string="Strapi User">
+          <group>
+
+            <field name="id"/>
+            <field name="userid"/>
+            <field name="name"/>
+            <field name="username"/>
+            <field name="email"/>
+            <field name="phone"/>
+            <field name="surname"/>
+            <field name="date_of_birth"/>
+            <field name="nationality"/>
+            <field name="provider"/>
+            <field name="confirmed"/>
+            <field name="blocked"/>
+            <field name="created_at"/>
+            <field name="updated_at"/>
+            <field name="invitee_id"/>
+            <field name="referral_id"/>
+            <field name="referrallink"/>
+            <field name="usertype"/>
+            <field name="bio"/>
+            <field name="language"/>
+            <field name="currency"/>
+            <!-- Add other fields as needed -->
+          </group>
+        </form>
+      </field>
+    </record>
+
+    <!-- Strapi User List View -->
+    <record model="ir.ui.view" id="view_strapi_user_list">
+      <field name="name">strapi.user.list</field>
+      <field name="model">strapi.user</field>
+      <field name="arch" type="xml">
+        <tree string="Strapi Users">
+          <field name="id"/>
+          <field name="userid"/>
           <field name="name"/>
-          <field name="ordered_person_name"/>
+          <field name="username"/>
           <field name="email"/>
           <field name="phone"/>
-          <field name="payment_status"/>
-          <field name="order_status"/>
-          <field name="description"/>
-          <field name="value2"/>
-
+          <field name="surname"/>
+          <field name="date_of_birth"/>
+          <field name="nationality"/>
+          <field name="provider"/>
+          <field name="confirmed"/>
+          <field name="blocked"/>
+          <field name="created_at"/>
+          <field name="updated_at"/>
+          <field name="invitee_id"/>
+          <field name="referral_id"/>
+          <field name="referrallink"/>
+          <field name="usertype"/>
+          <field name="bio"/>
+          <field name="language"/>
+          <field name="currency"/>
+          <!-- Add other fields as needed -->
         </tree>
       </field>
     </record>
 
-    <!-- actions opening views on models -->
-    <record model="ir.actions.act_window" id="order_crm.action_window">
-      <field name="name">order_crm window</field>
-      <field name="res_model">order_crm.order_crm</field>
-      <field name="view_mode">tree,form</field>
-    </record>
-
-    <!-- server action to the one above -->
-
-    <record model="ir.actions.server" id="order_crm.action_server">
-      <field name="name">order_crm server</field>
-      <field name="model_id" ref="model_order_crm_order_crm"/>
-      <field name="state">code</field>
-      <field name="code">
-        action = {
-          "type": "ir.actions.act_window",
-          "view_mode": "tree,form",
-          "res_model": model._name,
-        }
+    <!-- Strapi Order Form View -->
+    <record model="ir.ui.view" id="view_strapi_order_form">
+      <field name="name">strapi.order.form</field>
+      <field name="model">strapi.order</field>
+      <field name="arch" type="xml">
+        <form string="Strapi Order">
+          <group>
+            <field name="user_id"/>
+            <field name="order_details"/>
+            <!-- Add other fields as needed -->
+          </group>
+        </form>
       </field>
     </record>
 
+    <!-- Strapi Order List View -->
+    <record model="ir.ui.view" id="view_strapi_order_list">
+      <field name="name">strapi.order.list</field>
+      <field name="model">strapi.order</field>
+      <field name="arch" type="xml">
+        <tree string="Strapi Orders">
+          <field name="user_id"/>
+          <field name="order_details"/>
+          <!-- Add other fields as needed -->
+        </tree>
+      </field>
+    </record>
 
-    <!-- Top menu item -->
+    <!-- Strapi User Action -->
+    <record model="ir.actions.act_window" id="action_strapi_user">
+      <field name="name">Strapi Users</field>
+      <field name="res_model">strapi.user</field>
+      <field name="view_mode">tree,form</field>
+      <field name="view_id" ref="view_strapi_user_list"/>
+    </record>
 
-    <menuitem name="order_crm" id="order_crm.menu_root"/>
+    <!-- Strapi Order Action -->
+    <record model="ir.actions.act_window" id="action_strapi_order">
+      <field name="name">Strapi Orders</field>
+      <field name="res_model">strapi.order</field>
+      <field name="view_mode">tree,form</field>
+      <field name="view_id" ref="view_strapi_order_list"/>
+    </record>
 
-    <!-- menu categories -->
-    <menuitem name="Menu 1" id="order_crm.menu_1" parent="order_crm.menu_root"/>
-    <menuitem name="Menu 2" id="order_crm.menu_2" parent="order_crm.menu_root"/>
+    <!-- Top Menu Item -->
+    <menuitem name="Strapi" id="menu_strapi_root"/>
 
-    <!-- actions -->
-    <menuitem name="List" id="order_crm.menu_1_list" parent="order_crm.menu_1"
-              action="order_crm.action_window"/>
-    <menuitem name="Server to list" id="order_crm" parent="order_crm.menu_2"
-              action="order_crm.action_server"/>
+    <!-- User Menu -->
+    <menuitem name="Users" id="menu_strapi_users" parent="menu_strapi_root" action="action_strapi_user"/>
 
+    <!-- Order Menu -->
+    <menuitem name="Orders" id="menu_strapi_orders" parent="menu_strapi_root" action="action_strapi_order"/>
   </data>
 </odoo>

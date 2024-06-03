@@ -1,0 +1,35 @@
+<odoo>
+    <data>
+        <record model="ir.ui.view" id="view_strapi_user_form">
+            <field name="name">Strapi User Form</field>
+            <field name="model">strapi.user</field>
+            <field name="arch" type="xml">
+                <form string="Strapi User">
+                    <group>
+
+                        <field name="userid"/>
+                        <field name="name"/>
+                        <field name="username"/>
+                        <field name="email"/>
+                        <field name="phone"/>
+                          <field name="surname"/>
+                          <field name="date_of_birth"/>
+                          <field name="nationality"/>
+                          <field name="provider"/>
+                          <field name="confirmed"/>
+                          <field name="blocked"/>
+                          <field name="created_at"/>
+                          <field name="updated_at"/>
+                          <field name="invitee_id"/>
+                          <field name="referral_id"/>
+                          <field name="referrallink"/>
+                          <field name="usertype"/>
+                          <field name="bio"/>
+                          <field name="language"/>
+                          <field name="currency"/>
+                    </group>
+                </form>
+            </field>
+        </record>
+    </data>
+</odoo>

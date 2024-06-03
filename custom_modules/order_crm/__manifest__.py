@@ -26,6 +26,10 @@ The Order Management System is a comprehensive software solution designed to str
         'security/ir.model.access.csv',
         'views/views.xml',
         'views/templates.xml',
+        'views/user_view.xml',
+        'views/order_view.xml',
+        'data/cron_jobs.xml',
+
     ],
     # only loaded in demonstration mode
     'demo': [

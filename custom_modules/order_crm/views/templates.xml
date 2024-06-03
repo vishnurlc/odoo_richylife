@@ -1,24 +1,29 @@
 <odoo>
-    <data>
-<!--
-        <template id="listing">
-          <ul>
-            <li t-foreach="objects" t-as="object">
-              <a t-attf-href="#{ root }/objects/#{ object.id }">
-                <t t-esc="object.display_name"/>
-              </a>
-            </li>
-          </ul>
-        </template>
-        <template id="object">
-          <h1><t t-esc="object.display_name"/></h1>
-          <dl>
-            <t t-foreach="object._fields" t-as="field">
-              <dt><t t-esc="field"/></dt>
-              <dd><t t-esc="object[field]"/></dd>
+    <template id="hello_template" name="Hello Template">
+        <div class="container">
+            <h1>Hello, Odoo!</h1>
+            <p>Welcome to the custom module template.</p>
+
+            <t t-if="data">
+                <h2>Orders</h2>
+                <ul>
+                    <t t-foreach="data" t-as="order">
+                        <li>
+                            <strong>Order ID:</strong>
+                            <t t-esc="order.get('id', 'N/A')"/><br/>
+                            <strong>Customer Name:</strong>
+                            <t t-esc="order.get('attributes', {}).get('order_by', 'N/A').get('data').get('attributes').get('username')"/><br/>
+                            <strong>Total Amount:</strong>
+                            <t t-esc="order.get('attributes', {}).get('total_amount', 'N/A')"/><br/>
+                            <strong>Order Date:</strong>
+                            <t t-esc="order.get('attributes', {}).get('createdAt', 'N/A')"/><br/>
+                        </li>
+                    </t>
+                </ul>
             </t>
-          </dl>
-        </template>
--->
-    </data>
+            <t t-else="">
+                <p>No orders found.</p>
+            </t>
+        </div>
+    </template>
 </odoo>
