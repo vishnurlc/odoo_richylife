@@ -19,7 +19,7 @@ The Order Management System is a comprehensive software solution designed to str
     'version': '0.1',
 
     # any module necessary for this one to work correctly
-    'depends': ['base'],
+    'depends': ['base','crm','sale'],
 
     # always loaded
     'data': [

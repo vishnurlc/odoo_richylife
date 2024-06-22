@@ -4,4 +4,5 @@ from . import models
 from . import fetch_strapi_data
 from . import order
 from . import user
+from . import sale_order
 

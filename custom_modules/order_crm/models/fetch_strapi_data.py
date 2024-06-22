@@ -20,10 +20,11 @@ class FetchStrapiData(models.AbstractModel):
                 existing_user = self.env['strapi.user'].search([('email', '=', user['email'])], limit=1)
 
                 user_data = {
-                    'id': user.get('id'),
+                    'rootid': user.get('id'),
                     'username': user.get('username'),
                     'email': user.get('email'),
                     'provider': user.get('provider'),
+                    'verified' : user.get('Profile', {}).get('verified'),
                     'confirmed': user.get('confirmed'),
                     'blocked': user.get('blocked'),
                     'created_at': user.get('createdAt'),

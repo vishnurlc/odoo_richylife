@@ -5,29 +5,37 @@
             <field name="model">strapi.user</field>
             <field name="arch" type="xml">
                 <form string="Strapi User">
-                    <group>
-
-                        <field name="userid"/>
-                        <field name="name"/>
-                        <field name="username"/>
-                        <field name="email"/>
-                        <field name="phone"/>
-                          <field name="surname"/>
-                          <field name="date_of_birth"/>
-                          <field name="nationality"/>
-                          <field name="provider"/>
-                          <field name="confirmed"/>
-                          <field name="blocked"/>
-                          <field name="created_at"/>
-                          <field name="updated_at"/>
-                          <field name="invitee_id"/>
-                          <field name="referral_id"/>
-                          <field name="referrallink"/>
-                          <field name="usertype"/>
-                          <field name="bio"/>
-                          <field name="language"/>
-                          <field name="currency"/>
-                    </group>
+                    <header>
+                        <button name="action_do_something" type="object" string="verify"/>
+                        <button name="action_do_something" type="object" string="block"/>
+                        <button name="action_do_something" type="object" string="push"/>
+                    </header>
+                    <sheet>
+                        <group>
+                            <field name="rootid"/>
+                            <field name="userid"/>
+                            <field name="name"/>
+                            <field name="username"/>
+                            <field name="email"/>
+                            <field name="phone"/>
+                            <field name="surname"/>
+                            <field name="date_of_birth"/>
+                            <field name="nationality"/>
+                            <field name="provider"/>
+                            <field name="verified"/>
+                            <field name="confirmed"/>
+                            <field name="blocked"/>
+                            <field name="created_at"/>
+                            <field name="updated_at"/>
+                            <field name="invitee_id"/>
+                            <field name="referral_id"/>
+                            <field name="referrallink"/>
+                            <field name="usertype"/>
+                            <field name="bio"/>
+                            <field name="language"/>
+                            <field name="currency"/>
+                        </group>
+                    </sheet>
                 </form>
             </field>
         </record>

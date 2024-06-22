@@ -1,5 +1,6 @@
 <odoo>
   <data>
+
     <!-- Strapi User Form View -->
     <record model="ir.ui.view" id="view_strapi_user_form">
       <field name="name">strapi.user.form</field>
@@ -8,7 +9,7 @@
         <form string="Strapi User">
           <group>
 
-            <field name="id"/>
+            <field name="rootid"/>
             <field name="userid"/>
             <field name="name"/>
             <field name="username"/>
@@ -18,6 +19,7 @@
             <field name="date_of_birth"/>
             <field name="nationality"/>
             <field name="provider"/>
+            <field name="verified"/>
             <field name="confirmed"/>
             <field name="blocked"/>
             <field name="created_at"/>
@@ -41,7 +43,7 @@
       <field name="model">strapi.user</field>
       <field name="arch" type="xml">
         <tree string="Strapi Users">
-          <field name="id"/>
+          <field name="rootid"/>
           <field name="userid"/>
           <field name="name"/>
           <field name="username"/>
@@ -51,6 +53,7 @@
           <field name="date_of_birth"/>
           <field name="nationality"/>
           <field name="provider"/>
+          <field name="verified"/>
           <field name="confirmed"/>
           <field name="blocked"/>
           <field name="created_at"/>
@@ -97,7 +100,7 @@
 
     <!-- Strapi User Action -->
     <record model="ir.actions.act_window" id="action_strapi_user">
-      <field name="name">Strapi Users</field>
+      <field name="name">Strapi Users home</field>
       <field name="res_model">strapi.user</field>
       <field name="view_mode">tree,form</field>
       <field name="view_id" ref="view_strapi_user_list"/>
@@ -111,6 +114,14 @@
       <field name="view_id" ref="view_strapi_order_list"/>
     </record>
 
+    <record model="ir.actions.act_window" id="action_strapi_product">
+      <field name="name">Strapi Orders</field>
+      <field name="res_model">strapi.order</field>
+      <field name="view_mode">tree,form</field>
+      <field name="view_id" ref="view_strapi_order_list"/>
+    </record>
+
+
     <!-- Top Menu Item -->
     <menuitem name="Strapi" id="menu_strapi_root"/>
 
@@ -119,5 +130,36 @@
 
     <!-- Order Menu -->
     <menuitem name="Orders" id="menu_strapi_orders" parent="menu_strapi_root" action="action_strapi_order"/>
+    <menuitem name="product" id="menu_strapi_product" parent="menu_strapi_root" action="action_strapi_product"/>
+
+
+
+<!--    test-->
+
+<!--    <record id="view_order_form_inherit" model="ir.ui.view">-->
+<!--      <field name="name">sale.order.inherit</field>-->
+<!--      <field name="model">sale.order</field>-->
+<!--      <field name="inherit_id" ref="sale.view_order_form"></field>-->
+<!--      <field name="arch" type="xml">-->
+<!--        <xpath expr="//field[@name='payment_term_id']" position="after">-->
+<!--          <field name="agent12" />-->
+<!--          <field name="agent" />-->
+<!--        </xpath>-->
+<!--      </field>-->
+<!--    </record>-->
+    <record id="view_order_form_inherit" model="ir.ui.view">
+      <field name="name">crm.lead.inherit</field>
+      <field name="model">crm.lead</field>
+      <field name="inherit_id" ref="crm.crm_lead_view_form"></field>
+      <field name="arch" type="xml">
+        <xpath expr="//field[@name='tag_ids']" position="after">
+          <field name="agent12" />
+          <field name="agent" />
+        </xpath>
+      </field>
+    </record>
+
+
+
   </data>
 </odoo>
