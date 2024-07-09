@@ -77,7 +77,7 @@
       <field name="arch" type="xml">
         <form string="Strapi Order">
           <group>
-            <field name="user_id"/>
+<!--            <field name="user_id"/>-->
             <field name="order_details"/>
             <!-- Add other fields as needed -->
           </group>
@@ -91,7 +91,7 @@
       <field name="model">strapi.order</field>
       <field name="arch" type="xml">
         <tree string="Strapi Orders">
-          <field name="user_id"/>
+<!--          <field name="user_id"/>-->
           <field name="order_details"/>
           <!-- Add other fields as needed -->
         </tree>
