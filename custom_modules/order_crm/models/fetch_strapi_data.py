@@ -8,7 +8,8 @@ class FetchStrapiData(models.AbstractModel):
 
     @api.model
     def fetch_strapi_data(self):
-        user_response = requests.get('http://localhost:1337/api/users')
+        user_response = requests.get('https://clarity.richylife.ae/api/users')
+        print('pppppppppppppppp',user_response)
         # order_response = requests.get('http://localhost:1337/api/orders?populate=*')
 
         if user_response.status_code == 200:

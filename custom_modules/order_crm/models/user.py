@@ -5,6 +5,7 @@ from odoo.exceptions import UserError
 
 _logger = logging.getLogger(__name__)
 
+
 class StrapiUser(models.Model):
     _name = 'strapi.user'
     _description = 'Strapi User'
@@ -32,7 +33,6 @@ class StrapiUser(models.Model):
     date_of_birth = fields.Char(string='Date of Birth')
     nationality = fields.Char(string='Nationality')
 
-
     # @api.onchange('verified')
     # def _onchange_verified(self):
     #     self._trigger_action()
@@ -59,7 +59,7 @@ class StrapiUser(models.Model):
         }
 
         try:
-            response = requests.post(url, headers=headers,json=payload)
+            response = requests.post(url, headers=headers, json=payload)
             response.raise_for_status()  # Raise an HTTPError for bad responses
             data = response.json()  # Parse the JSON response
             print(data)
@@ -81,21 +81,21 @@ class StrapiUser(models.Model):
     # def _update_verified_in_backend(self):
     #     # Your backend URL and endpoint
     #     backend_url = 'https://your-backend.com/api/update_verified'
-        
+
     #     # Authentication details (replace with actual token or credentials)
     #     headers = {
     #         'Content-Type': 'application/json',
     #         'Authorization': 'Bearer your-access-token'  # Use the correct authentication method
     #     }
-        
+
     #     for record in self:
     #         payload = {
     #             'user_id': record.id,
     #             'verified': record.verified
     #         }
-            
+
     #         response = requests.post(backend_url, headers=headers, json=payload)
     #         if response.status_code == 200:
     #             _logger.info('Successfully updated verified status in backend for user_id: %s', record.id)
     #         else:
-    #             _logger.error('Failed to update verified status in backend for user_id: %s. Status: %s, Response: %s', record.id, response.status_code, response.text) 
+    #             _logger.error('Failed to update verified status in backend for user_id: %s. Status: %s, Response: %s', record.id, response.status_code, response.text)

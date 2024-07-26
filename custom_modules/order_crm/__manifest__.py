@@ -23,7 +23,7 @@ The Order Management System is a comprehensive software solution designed to str
 
     # always loaded
     'data': [
-        'security/ir.model.access.csv',
+        # 'security/ir.model.access.csv',
         'views/views.xml',
         'views/templates.xml',
         'views/user_view.xml',

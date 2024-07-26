@@ -1,0 +1,49 @@
+<odoo>
+    <record model="ir.ui.view" id="partner_view_buttons">
+        <field name="name">partner.view.buttons</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form"/>
+        <field name="priority" eval="11"/>
+        <field name="arch" type="xml">
+            <xpath expr="//sheet" position="before">
+                <header>
+                     <button name="action_do_something" string="Verify" type="object" class="btn-primary" data-hotkey="q"/>
+                    <field name="status" widget="statusbar"/>
+                </header>
+            </xpath>
+            <xpath expr="//page[@name='contact_addresses']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <xpath expr="//field[@name='function']" position="before">
+                <field name="create_date"/>
+                <field name="write_date"/>
+                <field name="verified"/>
+            </xpath>
+            <xpath expr="//field[@name='function']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <xpath expr="//field[@name='category_id']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <xpath expr="//field[@name='website']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <xpath expr="//field[@name='title']" position="after">
+                <field name="bio"/>
+            </xpath>
+            <xpath expr="//field[@name='vat']" position="after">
+                <field name="server_id"/>
+                <field name="date_of_birth"/>
+                <field name="invitee_id"/>
+                <field name="referral_id"/>
+                <field name="referrallink"/>
+                <field name="nationality"/>
+            </xpath>
+            <xpath expr="//field[@name='website']" position="after">
+                <field name="usertype"/>
+                <field name="language_id"/>
+                <field name="currency_id"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

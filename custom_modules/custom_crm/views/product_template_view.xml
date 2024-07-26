@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_product_template_form_inherit" model="ir.ui.view">
+        <field name="name">product.template.form.inherit</field>
+        <field name="model">product.template</field>
+        <field name="inherit_id" ref="product.product_template_only_form_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//sheet/notebook/page[@name='general_information']/group[1]" position="after">
+                <group>
+                    <group string="Details">
+                        <field name="server_id"/>
+                        <field name="fuel"/>
+                        <field name="seat"/>
+                        <field name="speed"/>
+                        <field name="engine"/>
+                        <field name="transmission"/>
+                        <field name="perdaylimit"/>
+                        <field name="cylinder"/>
+                        <field name="deposit"/>
+                        <field name="body"/>
+                    </group>
+                    <group string="Service">
+                        <field name="service_name"/>
+                        <field name="service_slug"/>
+                        <field name="service_dec"/>
+                    </group>
+                </group>
+                <group string="City">
+                    <field name="destination_name"/>
+                    <field name="city_name"/>
+                </group>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_product_product_form_inherit" model="ir.ui.view">
+        <field name="name">product.product.form.inherit</field>
+        <field name="model">product.product</field>
+        <field name="inherit_id" ref="product.product_normal_form_view"/>
+        <field name="arch" type="xml">
+             <xpath expr="//sheet/notebook/page[@name='general_information']/group[1]" position="after">
+                <group>
+                    <group string="Details">
+                        <field name="server_id"/>
+                        <field name="fuel"/>
+                        <field name="seat"/>
+                        <field name="speed"/>
+                        <field name="engine"/>
+                        <field name="transmission"/>
+                        <field name="perdaylimit"/>
+                        <field name="cylinder"/>
+                        <field name="deposit"/>
+                        <field name="body"/>
+                    </group>
+                    <group string="Service">
+                        <field name="service_name"/>
+                        <field name="service_slug"/>
+                        <field name="service_dec"/>
+                    </group>
+                </group>
+                <group string="City">
+                    <field name="destination_name"/>
+                    <field name="city_name"/>
+                </group>
+            </xpath>
+        </field>
+    </record>
+</odoo>
