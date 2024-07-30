@@ -25,7 +25,7 @@ class SaleOrder(models.Model):
             print('Error:', e)
             return
 
-        for rec in data:
+        for rec in data['data']:
             order_status = rec.get('orderStatus')
             created_at = rec.get('createdAt')
             updated_at = rec.get('updatedAt')

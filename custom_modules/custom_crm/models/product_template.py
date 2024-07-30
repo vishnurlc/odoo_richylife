@@ -40,7 +40,7 @@ class ProductTemplate(models.Model):
             response.raise_for_status()
             data = response.json()
 
-            for item in data:
+            for item in data['data']:
                 # product_data = item['attributes']
                 destination_name = None
                 if item['destination']:
@@ -77,7 +77,7 @@ class ProductTemplate(models.Model):
                     city_name = city_data.get('city')
 
                 vals = {
-                    'server_id': details_data.get('id') if details_data else False,
+                    'server_id': item['id'],
                     'name': item['name'],
                     'description': item['description'],
                     'list_price': item['price'],
