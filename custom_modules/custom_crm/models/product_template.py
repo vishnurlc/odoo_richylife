@@ -41,7 +41,6 @@ class ProductTemplate(models.Model):
             data = response.json()
 
             for item in data['data']:
-                # product_data = item['attributes']
                 destination_name = None
                 if item['destination']:
                     destination_data = item['destination']
@@ -62,22 +61,12 @@ class ProductTemplate(models.Model):
                         except (requests.exceptions.RequestException, Image.UnidentifiedImageError) as image_error:
                             print(f"Error processing image URL {image_url}: {image_error}")
 
-                details_data = None
-
-                if item['details']:
-                    details_data = item['details'][0]
-                service_name = None
-                service_data = None
-                if item['service']:
-                    service_data = item['service']
-                    service_name = service_data.get('name')
-                city_name = None
-                if item['city']:
-                    city_data = item['city']
-                    city_name = city_data.get('city')
+                details_data = item.get('details', [{}])[0]  # Fetching details data
+                service_data = item.get('service', {})  # Fetching service data
+                city_data = item.get('city', {})  # Fetching city data
 
                 vals = {
-                    'server_id': item['id'],
+                    'server_id': item['id'],  # Using item['id'] as the server_id
                     'name': item['name'],
                     'description': item['description'],
                     'list_price': item['price'],
@@ -85,30 +74,29 @@ class ProductTemplate(models.Model):
                     'destination_name': destination_name,
                     'image': image_binary,
                     'image_1920': image_binary,
-                    'fuel': details_data.get('fuel') if details_data else False,
-                    'seat': details_data.get('seat') if details_data else False,
-                    'speed': details_data.get('speed') if details_data else False,
-                    'engine': details_data.get('engine') if details_data else False,
-                    'transmission': details_data.get('transmission') if details_data else False,
-                    'perdaylimit': details_data.get('perdaylimit') if details_data else False,
-                    'cylinder': details_data.get('cylinder') if details_data else False,
-                    'deposit': details_data.get('deposit') if details_data else False,
-                    'body': details_data.get('body') if details_data else False,
-                    'service_name': service_name,
-                    'service_slug': service_data.get('name') if service_data else False,
-                    'service_dec': service_data.get('description') if service_data else False,
-                    'city_name': city_name,
+                    'fuel': details_data.get('fuel', False),
+                    'seat': details_data.get('seat', False),
+                    'speed': details_data.get('speed', False),
+                    'engine': details_data.get('engine', False),
+                    'transmission': details_data.get('transmission', False),
+                    'perdaylimit': details_data.get('perdaylimit', False),
+                    'cylinder': details_data.get('cylinder', False),
+                    'deposit': details_data.get('deposit', False),
+                    'body': details_data.get('body', False),
+                    'service_name': service_data.get('name', False),
+                    'service_slug': service_data.get('name', False),
+                    'service_dec': service_data.get('description', False),
+                    'city_name': city_data.get('city', False),
                 }
 
-                if details_data :
-                    product = self.search([('server_id', '=', details_data.get('id'))])
-                    if product:
-                        product.write(vals)
-                    else:
-                        product = self.create(vals)
+                # Searching by item['id'], which is consistent with 'server_id'
+                product = self.search([('server_id', '=', item['id'])])
+                if product:
+                    product.write(vals)
                 else:
                     product = self.create(vals)
                 print(f"Product {product.name} processed with ID {product.id}")
 
         except requests.exceptions.RequestException as e:
             print('Error:', e)
+
