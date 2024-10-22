@@ -2,6 +2,9 @@ from odoo import api, fields, models
 import requests
 from datetime import datetime
 from odoo.exceptions import UserError
+from PIL import Image
+from io import BytesIO
+import base64
 
 
 class ResPartner(models.Model):
@@ -37,7 +40,7 @@ class ResPartner(models.Model):
         if self.verified:
             raise UserError("The record is already verified.")
 
-        url = "http://localhost:1337/api/odoo"
+        url = "http://localhost:1337/api/odoo/user-verify"
         token = "897bb065dfd4245af91a50c643bf19f3143ed36291957ace85580bfba509ad2f3007916558c8017ff242c6af4571599095df72ece27eced4c5360f334cbf5de5db61e49a3bb61fde1235532e08612ff09761f0dc9ee2fefaea5a160a0df270019bdb96ffad796dfb025c8c34c5102f72b03d077825797125bd78804144d86523"  # Replace with your actual token
 
         headers = {
@@ -58,6 +61,7 @@ class ResPartner(models.Model):
 
         self.verified = True
 
+
     def _get_status(self, rec):
         if rec.get('Profile', {}).get('verified'):
             return 'verified'
@@ -70,7 +74,7 @@ class ResPartner(models.Model):
 
     @api.model
     def fetch_customer(self):
-        customer_data = requests.get('https://clarity.richylife.ae/api/users')
+        customer_data = requests.get('https://clarity.richylife.ae/api/users?populate=profile_img')
         if customer_data.status_code == 200:
             customer = customer_data.json()
             for rec in customer:
@@ -89,6 +93,28 @@ class ResPartner(models.Model):
                     except ValueError:
                         date_of_birth = None
 
+                image_binary = None
+                if rec['profile_img']:
+                    image_data = rec['profile_img']
+                    image_url = image_data.get('url')
+                    if image_url:
+                        try:
+                            # Fetch the image from the URL
+                            image_response = requests.get(image_url)
+                            image_response.raise_for_status()
+
+                            # Load the image with PIL
+                            image = Image.open(BytesIO(image_response.content))
+
+                            # Convert image to base64
+                            buffered = BytesIO()
+                            image_format = image.format if image.format else 'JPEG'  # Default to JPEG if format is missing
+                            image.save(buffered, format=image_format)
+
+                            image_binary = base64.b64encode(buffered.getvalue()).decode('utf-8')
+                        except (requests.exceptions.RequestException, Image.UnidentifiedImageError) as image_error:
+                            print(f"Error processing image URL {image_url}: {image_error}")
+
                 user_data = {
                     'name': username + " " + surname,
                     'email': rec.get('email'),
@@ -105,7 +131,8 @@ class ResPartner(models.Model):
                     'phone': rec.get('phone'),
                     'date_of_birth': date_of_birth,
                     'nationality': rec.get('nationality'),
-                    'server_id': rec.get('id')
+                    'server_id': rec.get('id'),
+                    'image_1920': image_binary
                 }
 
                 if existing_customer:
